@@ -1,11 +1,21 @@
 import 'package:flutter/material.dart';
 
+import 'logic/maze.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
+const double size = 200;
+const double cellWidth = 10;
+
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final Maze maze = Maze(
+    size: size,
+    cellWidth: cellWidth,
+  );
 
   // This widget is the root of your application.
   @override
