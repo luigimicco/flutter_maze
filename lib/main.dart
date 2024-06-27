@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_maze/logic/maze_painter.dart';
 
 import 'logic/maze.dart';
 
@@ -29,7 +30,12 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Flutter Maze demo'),
         ),
-        body: Container(),
+        body: Center(
+          child: CustomPaint(
+            size: const Size.square(size),
+            painter: MazePainter(maze: maze),
+          ),
+        ),
       ),
     );
   }
