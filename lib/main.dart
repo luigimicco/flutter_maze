@@ -16,9 +16,11 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: Scaffold(
-          appBar: AppBar(
-        title: const Text('Flutter Maze demo'),
-      )),
+        appBar: AppBar(
+          title: const Text('Flutter Maze demo'),
+        ),
+        body: Container(),
+      ),
     );
   }
 }
