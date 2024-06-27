@@ -7,8 +7,8 @@ void main() {
   runApp(MyApp());
 }
 
-const double size = 200;
-const double cellWidth = 10;
+const double size = 400;
+const double cellWidth = 30;
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
