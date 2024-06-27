@@ -46,6 +46,7 @@ class Maze {
         final y = cell.coords.y * cellWidth;
 
         _drawCells(canvas, cell, x, y);
+        _drawBorders(canvas, cell, x, y);
       }
     }
   }
@@ -59,5 +60,41 @@ class Maze {
       Rect.fromLTWH(x, y, cellWidth + 0.5, cellWidth + 0.5),
       backgroundPaint,
     );
+  }
+
+  void _drawBorders(Canvas canvas, Cell cell, double x, double y) {
+    final borderPaint = Paint()..color = Colors.red;
+
+    if (cell.borders.contains(Side.t)) {
+      canvas.drawLine(
+        Offset(x, y),
+        Offset(x + cellWidth, y),
+        borderPaint,
+      );
+    }
+
+    if (cell.borders.contains(Side.r)) {
+      canvas.drawLine(
+        Offset(x + cellWidth, y),
+        Offset(x + cellWidth, y + cellWidth),
+        borderPaint,
+      );
+    }
+
+    if (cell.borders.contains(Side.b)) {
+      canvas.drawLine(
+        Offset(x + cellWidth, y + cellWidth),
+        Offset(x, y + cellWidth),
+        borderPaint,
+      );
+    }
+
+    if (cell.borders.contains(Side.l)) {
+      canvas.drawLine(
+        Offset(x, y + cellWidth),
+        Offset(x, y),
+        borderPaint,
+      );
+    }
   }
 }
