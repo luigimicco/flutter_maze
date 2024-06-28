@@ -42,30 +42,32 @@ class Maze {
     for (var i = 0; i < grid.first.length; i++) {
       for (var j = 0; j < grid.length; j++) {
         final cell = grid[j][i];
-        final x = cell.coords.x * cellWidth;
-        final y = cell.coords.y * cellWidth;
 
-        _drawCells(canvas, cell, x, y);
-        _drawBorders(canvas, cell, x, y);
+        _drawCell(canvas, cell);
       }
     }
   }
 
-  void _drawCells(Canvas canvas, Cell cell, double x, double y) {
+  void _drawCell(Canvas canvas, Cell cell) {
     final backgroundPaint = Paint()
       ..color = Colors.black
       ..style = PaintingStyle.fill;
+
+    final x = cell.coords.x * cellWidth;
+    final y = cell.coords.y * cellWidth;
 
     canvas.drawRect(
       Rect.fromLTWH(x, y, cellWidth + 0.5, cellWidth + 0.5),
       backgroundPaint,
     );
+    _drawBorders(canvas, cell.borders, x, y);
   }
 
-  void _drawBorders(Canvas canvas, Cell cell, double x, double y) {
+  void _drawBorders(Canvas canvas, List<Side> borders, double x, double y) {
     final borderPaint = Paint()..color = Colors.red;
 
-    if (cell.borders.contains(Side.t)) {
+    // border top
+    if (borders.contains(Side.t)) {
       canvas.drawLine(
         Offset(x, y),
         Offset(x + cellWidth, y),
@@ -73,7 +75,8 @@ class Maze {
       );
     }
 
-    if (cell.borders.contains(Side.r)) {
+    // border right
+    if (borders.contains(Side.r)) {
       canvas.drawLine(
         Offset(x + cellWidth, y),
         Offset(x + cellWidth, y + cellWidth),
@@ -81,7 +84,8 @@ class Maze {
       );
     }
 
-    if (cell.borders.contains(Side.b)) {
+    // border bottom
+    if (borders.contains(Side.b)) {
       canvas.drawLine(
         Offset(x + cellWidth, y + cellWidth),
         Offset(x, y + cellWidth),
@@ -89,7 +93,8 @@ class Maze {
       );
     }
 
-    if (cell.borders.contains(Side.l)) {
+    // border left
+    if (borders.contains(Side.l)) {
       canvas.drawLine(
         Offset(x, y + cellWidth),
         Offset(x, y),
