@@ -9,6 +9,7 @@ class Cell {
   });
 
   final Coords coords;
+  bool visited = false;
 
   // ogni cella nasce con i bordi su tutti i lati
   final List<Side> borders = <Side>[
