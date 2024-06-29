@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_maze/logic/maze_painter.dart';
+import 'package:flutter_maze/painter/maze_painter.dart';
 
 import 'logic/maze.dart';
 

@@ -17,8 +17,7 @@ class Maze {
     required this.cellWidth,
   }) {
     // griglia iniziale
-    _createGrid();
-
+    createGrid();
     createMaze();
   }
 
@@ -28,7 +27,7 @@ class Maze {
   int get rows => (size / cellWidth).floor();
   int get columns => (size / cellWidth).floor();
 
-  void _createGrid() {
+  void createGrid() {
     grid.clear();
 
     for (var i = 0; i < rows * columns; i++) {
@@ -120,9 +119,9 @@ class Maze {
     return result;
   }
 
-  // eleco delle celle adiacenti non ancora visitate
-  List<int> _getNeighbors(int currentCell) {
-    final neighbors = <int>[];
+  // elenco delle celle adiacenti non ancora visitate
+  List<int> _getAdjacents(int currentCell) {
+    final adjacents = <int>[];
     final List<Side> borders = <Side>[];
 
     final y = grid[currentCell].coords.y;
@@ -141,15 +140,15 @@ class Maze {
       borders.add(Side.r); // right
     }
 
-    for (final border in borders) {
-      int adjacent = adjacentCell(currentCell, border);
+    for (final side in borders) {
+      int adjacent = adjacentCell(currentCell, side);
 
       if (!grid[adjacent].visited) {
-        neighbors.add(adjacent);
+        adjacents.add(adjacent);
       }
     }
 
-    return neighbors;
+    return adjacents;
   }
 
   void createMaze() {
@@ -160,10 +159,10 @@ class Maze {
     grid[currentCell].visited = true;
 
     while (!mazeComplete) {
-      final neighbors = _getNeighbors(currentCell);
+      final adjacents = _getAdjacents(currentCell);
 
-      if (neighbors.isNotEmpty) {
-        final nextCell = neighbors[Random().nextInt(neighbors.length)];
+      if (adjacents.isNotEmpty) {
+        final nextCell = adjacents[Random().nextInt(adjacents.length)];
 
         stack.add(currentCell);
         _openBorders(currentCell, nextCell);

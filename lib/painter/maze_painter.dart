@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'maze.dart';
+import '../logic/maze.dart';
 
 class MazePainter extends CustomPainter {
   const MazePainter({required this.maze});
