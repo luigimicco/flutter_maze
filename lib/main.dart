@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Flutter Maze demo'),
         ),
+        backgroundColor: Colors.black,
         body: Center(
           child: CustomPaint(
             size: const Size.square(size),

@@ -24,8 +24,6 @@ class Maze {
 
   // array delle celle
   final List<Cell> grid = <Cell>[];
-  final List<int> _stack = <int>[];
-  bool _mazeComplete = false;
 
   int get rows => (size / cellWidth).floor();
   int get columns => (size / cellWidth).floor();
@@ -123,7 +121,7 @@ class Maze {
   }
 
   // eleco delle celle adiacenti non ancora visitate
-  List<int> _getNeighbors(int currentCell, {required bool checkWalls}) {
+  List<int> _getNeighbors(int currentCell) {
     final neighbors = <int>[];
     final List<Side> borders = <Side>[];
 
@@ -131,23 +129,19 @@ class Maze {
     final x = grid[currentCell].coords.x;
 
     if (y > 0) {
-      borders.add(Side.t); // neighbors.add(currentCell - columns); // top
+      borders.add(Side.t); // top
     }
     if (y < (rows - 1)) {
-      borders.add(Side.b); //  neighbors.add(currentCell + columns); // bottom
+      borders.add(Side.b); // bottom
     }
     if (x > 0) {
-      borders.add(Side.l); // neighbors.add(currentCell - 1); // left
+      borders.add(Side.l); // left
     }
     if (x < (columns - 1)) {
-      borders.add(Side.r); //  neighbors.add(currentCell + 1); // right
+      borders.add(Side.r); // right
     }
 
     for (final border in borders) {
-      if (checkWalls && grid[currentCell].borders.contains(border)) {
-        continue;
-      }
-
       int adjacent = adjacentCell(currentCell, border);
 
       if (!grid[adjacent].visited) {
@@ -159,28 +153,27 @@ class Maze {
   }
 
   void createMaze() {
+    final List<int> stack = <int>[];
+    bool mazeComplete = false;
+
     int currentCell = 0; // cella alla posizione (0,0)
     grid[currentCell].visited = true;
 
-    while (!_mazeComplete) {
-      final neighbors = _getNeighbors(
-        currentCell,
-        checkWalls: false,
-      );
+    while (!mazeComplete) {
+      final neighbors = _getNeighbors(currentCell);
 
       if (neighbors.isNotEmpty) {
         final nextCell = neighbors[Random().nextInt(neighbors.length)];
 
-        _stack.add(currentCell);
+        stack.add(currentCell);
         _openBorders(currentCell, nextCell);
 
         currentCell = nextCell;
         grid[currentCell].visited = true;
-      } else if (_stack.isNotEmpty) {
-        currentCell = _stack.removeLast();
+      } else if (stack.isNotEmpty) {
+        currentCell = stack.removeLast();
       } else {
-        currentCell = -1;
-        _mazeComplete = true;
+        mazeComplete = true;
       }
     }
   }
