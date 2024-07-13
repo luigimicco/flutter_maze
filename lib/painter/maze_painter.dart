@@ -9,7 +9,9 @@ class MazePainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    maze.draw(canvas);
+    maze
+      ..draw(canvas)
+      ..drawPath(canvas);
   }
 
   @override

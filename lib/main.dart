@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_maze/painter/maze_painter.dart';
 
@@ -16,6 +18,8 @@ class MyApp extends StatelessWidget {
   final Maze maze = Maze(
     size: size,
     cellWidth: cellWidth,
+    start: 0,
+    end: pow((size / cellWidth).floor(), 2).floor() - 1,
   );
 
   // This widget is the root of your application.
