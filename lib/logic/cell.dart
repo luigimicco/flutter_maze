@@ -18,4 +18,11 @@ class Cell {
     Side.b,
     Side.l,
   ];
+
+  double f = 0;
+  double g = 0;
+  double h = 0;
+
+  int? previous;
+  bool isPath = false;
 }
