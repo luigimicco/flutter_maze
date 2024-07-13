@@ -1,6 +1,8 @@
 # flutter_maze
 
-a simple impleemntation for maze and pathfinding.
+a simple implementation for maze and pathfinding.
 
 ![](/screenshots/grid.png)
 ![](/screenshots/maze.png)
+![](/screenshots/caselle.png)
+![](/screenshots/maze_solved.png)
